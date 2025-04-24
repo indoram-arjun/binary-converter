@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Binary Encoder with Voice & Share</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://media.istockphoto.com/id/912299634/photo/computer-crime-concept.jpg?s=612x612&w=0&k=20&c=JOYSw69V4tr2hvnAt3HsOEbyXAoSXYulHrh8ifqqJXk=') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        
+        nav {
+            background-color: #111;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: relative;
+        }
+        
+        .brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #00d9ff;
+        }
+        
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: white;
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: #111;
+                padding: 10px 0;
+            }
+            
+            .nav-links.show {
+                display: flex;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+        }
+        /* main section here   */
+        
+        main{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        label {
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: block;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            padding: 12px 20px;
+            font-size: 18px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            margin: 10px 0;
+            background-color: #f4f4f4;
+            color: #333;
+            outline: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            border: 2px solid #28a745;
+            background-color: #e8f5e9;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #f0f0f0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        .share-btn {
+            margin-top: 10px;
+            background-color: #007bff;
+        }
+
+        .share-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <nav style="margin-bottom: 80px;">
+        <div class="brand">MyBrand</div>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#">Text to binary</a>
+        </div>
+    </nav>
+    <section style="width: 80%; margin: 0 auto; text-align: center; padding: 20px; background: rgba(0, 0, 0, 0.6); box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
+        <h1 style="font-size: 48px; color: #00ffcc; text-shadow: 2px 2px 10px black;">Text to Binary Converter</h1>
+        <p style="font-size: 22px; color: #ccc; max-width: 700px; margin: 20px auto;">
+            Instantly convert any text into binary format. Hear it. Share it. Learn with style!
+        </p>
+    </section>
+    <section style="background: rgba(0,0,0,0.8); padding: 50px 30px; color: white; text-align: center; margin-top: 80px;">
+        <h2 style="font-size: 36px; color: #28a745; margin-bottom: 20px;">About This Tool</h2>
+        <p style="font-size: 20px; max-width: 800px; margin: auto;">
+            This web application is designed to help students, tech enthusiasts, and curious minds learn how binary encoding works in a simple and interactive way. 
+            Just type your text, convert it to binary, hear it through speech synthesis, and even share it with your friends using the Web Share API!
+            <br><br>
+            Whether you're a coder or just someone having fun, this tool is built for you. Made with ❤️ for learning and exploring the digital world.
+        </p>
+    </section>
+        
+    <main>
+        <div class="container">
+            <h1>Text to Binary Encoder</h1>
+            <label for="textInput">Enter Text:</label>
+            <textarea id="textInput" rows="4" placeholder="Enter text to convert to binary"></textarea>
+            <button onclick="convertToBinary()">Convert to Binary</button>
+    
+            <div id="output"></div>
+            <button id="speakButton" onclick="speakText()" style="display: none;">Speak Text</button>
+            <button id="shareButton" class="share-btn" onclick="shareOutput()" style="display: none;">Share Output</button>
+        </div>
+    </main>
+
+    <footer style="background: rgba(0, 0, 0, 0.85); color: #ccc; text-align: center; padding: 25px 15px; font-size: 16px; position: relative; margin-top: 50px;">
+    <p style="margin: 10px 0;">&copy; 2025 Binary Converter Tool. All rights reserved.</p>
+    <p style="margin: 10px 0;">Made with ❤️ for learning | Developed by <strong>Arjun</strong></p>
+    <p style="margin: 10px 0;">
+        <a href="mailto:contact@binarytool.dev" style="color: #28a745; text-decoration: none;">Contact Us</a>
+        &nbsp;|&nbsp;
+        <a href="https://github.com/yourgithub" target="_blank" style="color: #28a745; text-decoration: none;">GitHub</a>
+    </p>
+</footer>
+
+
+    <script>
+
+        // nav section here 
+        const toggle = document.getElementById("menu-toggle");
+        const links = document.getElementById("nav-links");
+
+        toggle.addEventListener("click", () => {
+            links.classList.toggle("show");
+        });
+        // Convert the input text to binary
+        function convertToBinary() {
+            let text = document.getElementById('textInput').value.trim();
+            if (text === "") {
+                document.getElementById('output').innerText = "Please enter some text!";
+                document.getElementById('speakButton').style.display = "none";
+                document.getElementById('shareButton').style.display = "none";
+                return;
+            }
+
+            let binaryString = '';
+            for (let i = 0; i < text.length; i++) {
+                binaryString += text.charCodeAt(i).toString(2).padStart(8, '0') + ' ';
+            }
+
+            document.getElementById('output').innerText = 'Binary Code: ' + binaryString.trim();
+            document.getElementById('speakButton').style.display = "inline-block";
+            document.getElementById('shareButton').style.display = "inline-block";
+        }
+
+        // Function to speak the text out loud
+        function speakText() {
+            let text = document.getElementById('textInput').value.trim();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = "en-US";
+            window.speechSynthesis.speak(speech);
+        }
+
+        function shareOutput() {
+            const text = document.getElementById('output').innerText;
+
+            // Check for HTTPS or localhost
+            if (window.isSecureContext && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Binary Converter',
+                        text: text,
+                        url: window.location.href
+                    })
+                        .then(() => console.log('Shared successfully'))
+                        .catch((err) => {
+                            console.warn('Share failed:', err);
+                            alert('Share failed. You can copy the output instead.');
+                            copyFallback(text);
+                        });
+                } else {
+                    alert('Web Share API not supported. Copying instead.');
+                    copyFallback(text);
+                }
+            } else {
+                alert("Sharing works only on HTTPS or localhost. Copying output instead.");
+                copyFallback(text);
+            }
+        }
+
+        // Fallback to copy text to clipboard
+        function copyFallback(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Output copied to clipboard!");
+            }).catch(err => {
+                console.error("Copy failed", err);
+                alert("Unable to copy. Please do it manually.");
+            });
+        }
+    </script>
+</body>
+
+</html>
